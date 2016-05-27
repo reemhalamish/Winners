@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         Button divine_score = (Button) findViewById(R.id.button);
         divine_score.setText("התוצאה תהיה:");
 
