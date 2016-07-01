@@ -53,4 +53,19 @@ public class Games {
     }
 
 
- }
+    /**
+     * do NOT call AFTER POLISH!!!
+     */
+    public void flip() {
+       String temp;
+        temp=this.nameA;
+        this.nameA=this.nameB;
+        this.nameB=temp;
+        ArrayList<Integer> temparr;
+        temparr=this.winsA;
+        this.winsA=this.winsB;
+        this.winsB=temparr;
+
+
+    }
+}
