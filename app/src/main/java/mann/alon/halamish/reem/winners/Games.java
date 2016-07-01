@@ -16,13 +16,15 @@ public class Games {
     double SEM_A;
     double SEM_B;
 
-    public Games(String nameA, String nameB, ArrayList<Integer> winsA, ArrayList<Integer> winsB) {
+    public Games(String nameA, String nameB) {
         this.nameA = nameA;
         this.nameB = nameB;
-        this.winsA = winsA;
-        this.winsB = winsB;
+        this.winsA = new ArrayList<>();
+        this.winsB = new ArrayList<>();
 
+    }
 
+    public void polish(){
         // calculate SEM and mean
         double sum=0;
         for (Integer i:winsA){sum=sum+i;}
@@ -51,27 +53,4 @@ public class Games {
     }
 
 
-    public String getNameA() {
-        return nameA;
-    }
-
-    public String getNameB() {
-        return nameB;
-    }
-
-    public double getMeanA() {
-        return meanA;
-    }
-
-    public double getMeanB() {
-        return meanB;
-    }
-
-    public double getSEM_A() {
-        return SEM_A;
-    }
-
-    public double getSEM_B() {
-        return SEM_B;
-    }
-}
+ }
