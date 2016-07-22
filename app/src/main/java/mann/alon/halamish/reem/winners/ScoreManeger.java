@@ -58,7 +58,7 @@ public class ScoreManeger {
                 }
                 scoreA=Integer.parseInt(parts[2].trim());
                 scoreB=Integer.parseInt(parts[3].trim());
-                Games relevantGames = bringRelevantGames(groupA, groupB, true);
+                Games relevantGames = getRelevantGames(groupA, groupB, true);
                 relevantGames.winsA.add(scoreA);
                 relevantGames.winsB.add(scoreB);
 
@@ -72,7 +72,6 @@ public class ScoreManeger {
             }
             Collections.sort(all_groups_names);
 
-// todo get the table :) and complete this functin
 
 
         } catch (IOException e) {
@@ -80,7 +79,7 @@ public class ScoreManeger {
         }
     }
 
-    private Games bringRelevantGames(String groupA, String groupB, boolean createIfNotExist) {
+    public Games getRelevantGames(String groupA, String groupB, boolean createIfNotExist) {
         for (Games game:all_games){
             if (game.nameA.equals(groupA) && game.nameB.equals(groupB))  return game;
             if (game.nameB.equals(groupA) && game.nameA.equals(groupB))  {
