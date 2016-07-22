@@ -41,6 +41,7 @@ public class Games {
         }
         double std = sum_squers / (winsA.size()-1);
         SEM_A=std/ Math.sqrt(winsA.size());
+        if (winsA.size()==1) SEM_A=10;
 
         sum_squers=0;
         for (Integer i:winsA){
@@ -48,14 +49,13 @@ public class Games {
             sum_squers += distance;
         }
         std = sum_squers / (winsB.size()-1);
+
         SEM_B=std/ Math.sqrt(winsB.size());
+        if (winsB.size()==1) SEM_B=10;
 
     }
 
 
-    /**
-     * do NOT call AFTER POLISH!!!
-     */
     public void flip() {
        String temp;
         temp=this.nameA;
@@ -66,6 +66,13 @@ public class Games {
         this.winsA=this.winsB;
         this.winsB=temparr;
 
+        double tempD;
+        tempD=meanA;
+        meanA=meanB;
+        meanB=tempD;
+        tempD=SEM_A;
+        SEM_A=SEM_B;
+        SEM_B=tempD;
 
     }
 }

@@ -13,9 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class ScoreManeger {
+    private static final java.lang.String TABLE_FILE_NAME = "all_data.txt";
     private static ScoreManeger initiation;
     private ScoreManeger() {
         try {
@@ -25,7 +27,7 @@ public class ScoreManeger {
         3. for each Games object left, call Games.polish()
          */
         App application=App.getApplication();
-            InputStream stream = application.getAssets().open("all_data.txt");
+            InputStream stream = application.getAssets().open(TABLE_FILE_NAME);
             String table=get_string_from_input(stream);
             Log.d("score", stream.toString());
             String[] lines=table.split("\n");
@@ -42,17 +44,33 @@ public class ScoreManeger {
                 int scoreA, scoreB;
                 groupA=parts[0];
                 groupB=parts[1];
+                while (groupA.startsWith(" ")) {
+                    groupA = groupA.substring(1);
+                }
+                while (groupA.endsWith(" ")) {
+                    groupA = groupA.substring(0,groupA.length()-1);
+                }
+                while (groupB.startsWith(" ")) {
+                    groupB= groupB.substring(1);
+                }
+                while (groupB.endsWith(" ")) {
+                    groupB = groupB.substring(0,groupB.length()-1);
+                }
                 scoreA=Integer.parseInt(parts[2].trim());
                 scoreB=Integer.parseInt(parts[3].trim());
-                Games relevantGames = bringRelevantGames(groupA, groupB);
+                Games relevantGames = bringRelevantGames(groupA, groupB, true);
                 relevantGames.winsA.add(scoreA);
                 relevantGames.winsB.add(scoreB);
+
+                populate_group_names_if_not_exist(groupA);
+                populate_group_names_if_not_exist(groupB);
 
             }
             for (Games current:all_games){
                 current.polish();
                 Log.d("games", "ready. meanA: " + current.meanA);
             }
+            Collections.sort(all_groups_names);
 
 // todo get the table :) and complete this functin
 
@@ -62,7 +80,7 @@ public class ScoreManeger {
         }
     }
 
-    private Games bringRelevantGames(String groupA, String groupB) {
+    private Games bringRelevantGames(String groupA, String groupB, boolean createIfNotExist) {
         for (Games game:all_games){
             if (game.nameA.equals(groupA) && game.nameB.equals(groupB))  return game;
             if (game.nameB.equals(groupA) && game.nameA.equals(groupB))  {
@@ -70,9 +88,13 @@ public class ScoreManeger {
                 return game;
             }
         }
-        Games newGame = new Games(groupA, groupB);
-        all_games.add(newGame);
-        return newGame;
+        if (createIfNotExist) {
+            Games newGame = new Games(groupA, groupB);
+            all_games.add(newGame);
+            return newGame;
+        } else {
+            return null;
+        }
     }
 
     private String get_string_from_input(InputStream stream) {
