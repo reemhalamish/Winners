@@ -1,4 +1,9 @@
 <resources>
 
-    <string name="action_settings">הגדרות</string>
+
+    <string name="guess_score">נבא תוצאות!</string>
+    <string name="score_group_a">גולים קבוצה א:</string>
+    <string name="score_group_b">גולים קבוצה ב:</string>
+    <string name="toast_same_group">האלו!? מה, משחקים נגד עצמינו עכשיו??</string>
+    <string name="toast_not_found">גבר, המשחק לא קרה. תחשוב לבד מה אנחנו טוטו?</string>
 </resources>

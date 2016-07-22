@@ -2,18 +2,18 @@ package mann.alon.halamish.reem.winners;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
     static int indA=0, indB=0;
 
@@ -90,19 +90,20 @@ public class MainActivity extends AppCompatActivity {
                 groupA=adapterA.getItem(indA);
                 groupB=adapterB.getItem(indB);
                 if (groupA.equals(groupB)) {
-                    Toast.makeText(App.app,"האלו!? מה, משחקים נגד עצמינו עכשיו??",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(App.app,App.app.getString(R.string.toast_same_group),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Games relevant;
                 relevant= manager.getRelevantGames(groupA,groupB,false);
                 if (relevant==null) {
-                    Toast.makeText(App.app,"גבר, המשחק לא קרה. תחשוב לבד מה אנחנו טוטו?",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(App.app,App.app.getString(R.string.toast_not_found),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                tvScoreA.setText(relevant.meanA+"");
-                tvScoreB.setText(relevant.meanB+"");
-                tvSEM_A.setText("+-"+relevant.SEM_A);
-                tvSEM_B.setText("+-"+relevant.SEM_B);
+                DecimalFormat formater=new DecimalFormat("##.##");
+                tvScoreA.setText(formater.format(relevant.meanA));
+                tvScoreB.setText(formater.format(relevant.meanB));
+                tvSEM_A.setText(getString(R.string.plus_minus)+formater.format(relevant.SEM_A));
+                tvSEM_B.setText(getString(R.string.plus_minus)+formater.format(relevant.SEM_B));
 
             }
         });

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">WinnerS</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="guess_score">guess score:</string>
+    <string name="score_group_a">Score Group A:</string>
+    <string name="score_group_b">Score Group B:</string>
+    <string name="toast_same_group">Sorry Sir, a group may not compete with itself</string>
+    <string name="toast_not_found">Sorry Sir, this game has never happened so far </string>
+    <string name="plus_minus">+-</string>
 </resources>
